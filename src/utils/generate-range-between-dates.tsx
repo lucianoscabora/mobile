@@ -1,18 +1,16 @@
-import dayjs from "dayjs";
+import dayjs from 'dayjs'
 
-export function generateDatesFromYearBeginning() {
+export function generateRangeDatesFromYearStart() {
+  const startDate = dayjs().startOf('year')
+  const endDate = new Date()
 
-    const firstDayOfTheYear = dayjs().startOf('year')
-    const today = new Date()
+  let dateRange = []
+  let compareDate = startDate
 
-    const dates = []
-    let compareDate = firstDayOfTheYear
+  while (compareDate.isBefore(endDate)) {
+    dateRange.push(compareDate.toDate())
+    compareDate = compareDate.add(1, 'day')
+  }
 
-    while(compareDate.isBefore(today)) {
-        dates.push(compareDate.toDate())
-        compareDate = compareDate.add(1, 'day')
-    }
-
-    return dates;
-
+  return dateRange
 }
